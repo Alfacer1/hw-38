@@ -16,19 +16,17 @@ export const myPrint = (a, b, res) => {
     return `${a}^${b}=${res}`; 
 }
 
-export const myPow = (a, b, myPrint) => {
-    if (b === 0) {
-        return myPrint(a, b, 1);
-    }
+export const myPow = (a, b, callback) => {
+const pow = (x, n) => {
+    if (n === 0) return 1
+    if (n < 0) return 1 / pow(x, -n)
+    return x * pow(x, n - 1)
+  }
 
-    return myPow(a, b - 1, myPrint) * a;
+  return callback(a, b, pow(a, b))
 }
 
 console.log(myPow(3, 4, myPrint));  // "3^4=81"
 console.log(myPow(2, 3, myPrint));  // "2^3=8"
 console.log(myPow(5, 0, myPrint));  // "5^0=1"
 console.log(myPow(2, 1, myPrint));  // "2^1=2"
-
-
-
-
